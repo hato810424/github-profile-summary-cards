@@ -4,16 +4,11 @@ import { getReposPerLanguageSVGWithThemeName } from './github-profile-summary-ca
 import { getCommitsLanguageSVGWithThemeName } from './github-profile-summary-cards/src/cards/most-commit-language-card';
 import { getStatsSVGWithThemeName } from './github-profile-summary-cards/src/cards/stats-card';
 import { getProductiveTimeSVGWithThemeName } from './github-profile-summary-cards/src/cards/productive-time-card';
+import type { Context } from 'hono';
 
-type Env = {
-  GITHUB_TOKEN: string;
-  USERNAME: string;
-  THEME?: string;
-};
+const app = new Hono<{ Bindings: Cloudflare.Env }>();
 
-const app = new Hono<{ Bindings: Env }>();
-
-const getCommonParams = (c: any) => {
+const getCommonParams = (c: Context) => {
   const username = c.env.USERNAME;
   const theme = c.req.query('theme') || c.env.THEME || 'default';
   const token = c.env.GITHUB_TOKEN;
