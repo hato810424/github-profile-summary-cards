@@ -18,7 +18,7 @@ node_modules/
 .env.local
 
 # original
-github-profile-summary-cards/
+./github-profile-summary-cards/
 
 # wrangler
 .dev.vars*
