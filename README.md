@@ -4,10 +4,10 @@
 
 ## 使用方法
 
-![Profile Details Card](https://github-profile-summary-cards.worker.dev/api/profile-details?theme=default)
+![Profile Details Card](https://github-profile-summary-cards.hato810424.workers.dev/api/profile-details?theme=default)
 
 ```
-![](https://github-profile-summary-cards.worker.dev/api/profile-details?theme=default)
+![](https://github-profile-summary-cards.hato810424.workers.dev/api/profile-details?theme=default)
 ```
 
 ユーザー名は、環境変数で固定されています。
