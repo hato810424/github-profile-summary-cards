@@ -1,23 +1,23 @@
 import {Theme} from '../const/theme';
 import * as d3 from 'd3';
-import {JSDOM} from 'jsdom';
+import {parseHTML} from 'linkedom';
 export class Card {
     title: string;
     width: number;
     height: number;
     xPadding: number;
     yPadding: number;
-    body: d3.Selection<d3.ContainerElement, any, null, undefined>;
-    svg: d3.Selection<SVGSVGElement, any, null, undefined>;
+    body: d3.Selection<any, any, null, undefined>;
+    svg: d3.Selection<any, any, null, undefined>;
     constructor(title = 'Title', width = 1280, height = 1024, theme: Theme, xPadding = 30, yPadding = 40) {
         this.title = title;
         this.width = width;
         this.height = height;
         this.xPadding = xPadding;
         this.yPadding = yPadding;
-        // use fake dom let us can get html element
-        const fakeDom = new JSDOM('<!DOCTYPE html><html><body></body></html>');
-        this.body = d3.select(fakeDom.window.document).select('body');
+        // use linkedom for Cloudflare Workers
+        const {document} = parseHTML('<!DOCTYPE html><html><body></body></html>');
+        this.body = d3.select(document as any).select('body');
         this.svg = this.body
             .append('div')
             .attr('class', 'container')

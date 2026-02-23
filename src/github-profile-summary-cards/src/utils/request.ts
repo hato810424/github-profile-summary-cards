@@ -1,26 +1,15 @@
-import core from '@actions/core';
-import rax from 'retry-axios';
-import axios, {AxiosPromise} from 'axios';
-
-rax.attach();
-
-export default function request(header: any, data: any): AxiosPromise<any> {
-    return axios({
-        url: 'https://api.github.com/graphql',
-        method: 'post',
-        headers: header,
-        data: data,
-        raxConfig: {
-            retry: 3,
-            noResponseRetries: 3,
-            retryDelay: 1000,
-            backoffType: 'linear',
-            httpMethodsToRetry: ['POST'],
-            onRetryAttempt: err => {
-                const cfg = rax.getConfig(err);
-                core.warning(err);
-                core.warning(`Retry attempt #${cfg?.currentRetryAttempt}`);
-            }
-        }
+// import core from '@actions/core';
+export default async function request(header: any, data: any): Promise<any> {
+    const response = await fetch('https://api.github.com/graphql', {
+        method: 'POST',
+        headers: {
+            ...header,
+            'Content-Type': 'application/json',
+            'User-Agent': 'github-profile-summary-cards-worker',
+        },
+        body: JSON.stringify(data),
     });
+
+    const result = await response.json();
+    return { data: result };
 }

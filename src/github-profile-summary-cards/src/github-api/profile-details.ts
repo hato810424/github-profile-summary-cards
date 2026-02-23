@@ -52,7 +52,7 @@ const fetcher = (token: string, variables: any) => {
             company
             location
             websiteUrl
-            repositories(first: 100,privacy:PUBLIC, isFork: false, ownerAffiliations: OWNER, orderBy: {direction: DESC, field: STARGAZERS}) {
+            repositories(first: 100, isFork: false, ownerAffiliations: OWNER, orderBy: {direction: DESC, field: STARGAZERS}) {
               totalCount
               nodes {
                 stargazers {
@@ -71,7 +71,7 @@ const fetcher = (token: string, variables: any) => {
                 }
                 contributionYears
             }
-            repositoriesContributedTo(first: 1,includeUserRepositories:true, privacy:PUBLIC, contributionTypes: [COMMIT, ISSUE, PULL_REQUEST, REPOSITORY]) {
+            repositoriesContributedTo(first: 1,includeUserRepositories:true, contributionTypes: [COMMIT, ISSUE, PULL_REQUEST, REPOSITORY]) {
                 totalCount
             }
             pullRequests(first: 1) {
