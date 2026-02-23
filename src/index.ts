@@ -57,6 +57,10 @@ const getCachedSVG = async (
   return svg;
 };
 
+app.get('/', async (c) => {
+  return c.text('see: https://github.com/hato810424/github-profile-summary-cards', 200);
+});
+
 app.get('/api/profile-details', async (c) => {
   try {
     const { username, theme, token } = getCommonParams(c);
